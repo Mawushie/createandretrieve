@@ -7,12 +7,13 @@ class UserList extends React.Component{
             <div>
                 <h2>User List</h2>
                 {this.props.users.map((user) => {
-                    return <UserItem  user = {user}/>;
+                    return <UserItem  user = {user} key={user.id} deleteUser = {this.props.deleteUser}/>;
                 })}
             
             </div>
         )
     }
+    //we 
 }
 
 export default UserList;

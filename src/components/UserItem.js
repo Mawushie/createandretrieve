@@ -1,9 +1,14 @@
 import React from "react";
 
 class UserItem extends React.Component{
-    constructor(props){
+    constructor(props){  
         super(props)
     }
+
+    handleDelete = () => {
+        this.props.deleteUser(this.props.user.id); 
+    }
+
     render(){
         return(
             <div className = "row text-center">
@@ -24,8 +29,8 @@ class UserItem extends React.Component{
 
             <div>
                 <h4>Action</h4>
-                <button className = "btn btn-success">Edit</button>
-                <button className = "btn btn-danger">Delete</button>
+                <button className = "btn btn-success" >Edit</button>
+                <button className = "btn btn-danger" onClick = {this.handleDelete} >Delete</button>
             </div>
 
         </div>
