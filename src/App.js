@@ -35,6 +35,7 @@ class App extends React.Component{
 
   //goes through the users array and finds the one with the ID we wanna delete
   //and returns the new information entered by the user
+  
   updateUser = (id,updatedUserInfo) =>{
      let newUsers= this.state.users.map((user) => {
       if(user.id === id){
