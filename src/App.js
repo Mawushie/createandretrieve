@@ -4,6 +4,7 @@ import React from 'react';
 import UserForm from './components/UserForm';
 import UserItem from './components/UserItem';
 import UserList from './components/UserList';
+import EditUserForm from './components/EditUserForm';
 
 class App extends React.Component{
   constructor(props){
@@ -21,13 +22,29 @@ class App extends React.Component{
     this.setState({
       users :[...this.state.users, user] //copying each user into the array
     })
-    console.log({user});
+    // console.log({user});
   }
 
   deleteUser = (id) =>{
    this.setState({
-     users : this.state.users.filter(user => user.id !==id)
+     users : this.state.users.filter(user => user.id !==id) //show the state of the users to display all the others except 
+     //the one that matches the ID i want to delete
+
    })
+  }
+
+  //goes through the users array and finds the one with the ID we wanna delete
+  //and returns the new information entered by the user
+  updateUser = (id,updatedUserInfo) =>{
+     let newUsers= this.state.users.map((user) => {
+      if(user.id === id){
+        return updatedUserInfo;
+      }
+      return user;
+    })
+    this.setState({
+      users: newUsers
+    })
   }
 
   render(){
@@ -39,7 +56,10 @@ class App extends React.Component{
         </div>
         
         <div className = "col-md-6 userlist">
-          <UserList users = {this.state.users} deleteUser = {this.deleteUser}/>   
+          <UserList 
+          users = {this.state.users} 
+          deleteUser = {this.deleteUser} 
+          updateUser = {this.updateUser}/>   
         </div>
         
       </div>

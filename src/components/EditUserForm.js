@@ -1,14 +1,15 @@
 import React from 'react';
 
-class UserForm extends React.Component{
+class UserUserForm extends React.Component{
     constructor(props){
         super(props)
 
+        //autofill the edit form with the info saved already
         this.state = {
-            username : "",
-            email : "",
-            country : "",
-            password : ""
+            username : this.props.user.username,
+            email : this.props.user.email,
+            country : this.props.user.country,
+            password : this.props.user.password
         };
     }
     //set the value of what is typed by user into the state
@@ -19,21 +20,15 @@ class UserForm extends React.Component{
     }
 
     handleSubmit = () => {
-        this.props.addUser(this.state);
-        //this clears whatever was typed initially into the form;basically resetting the form
-        this.setState({
-            username : "",
-            email : "",
-            country : "",
-            password : ""
-        })
+        let user = {...this.state, id: this.props.user.id}
+        this.props.updateUser(this.props.user.id, user);
+        this.props.closeModal();
     }
 
     render(){
         return (
             <div>
                 <form>
-                    <h2>SignUp Form</h2>
                     <label>Username</label> <br></br>
                     <input type = "text" name = "username" value = {this.state.username} onChange = {this.handleOnChange}></input> <br></br>
 
@@ -48,7 +43,8 @@ class UserForm extends React.Component{
 
                     <br></br>
                 
-                    <button type="button" onClick = {this.handleSubmit}>Create User</button>
+                    <button type="button" onClick = {this.handleSubmit}>Update</button>
+
                 </form>
             </div>
         )
@@ -62,4 +58,4 @@ class UserForm extends React.Component{
     //also calls the handleSubmit
 }
 
-export default UserForm;
+export default UserUserForm;
